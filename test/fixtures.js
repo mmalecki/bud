@@ -37,7 +37,8 @@ fixtures.getServers = function getServers(options) {
       port: FRONT_PORT
     }),
     backends: [],
-    balance: options.balance || 'roundrobin'
+    balance: options.balance || 'roundrobin',
+    contexts: options.contexts || []
   };
 
   beforeEach(function(cb) {
@@ -86,7 +87,8 @@ fixtures.getServers = function getServers(options) {
           return !/^(server|requests|index)$/.test(key);
         });
       }),
-      balance: sh.balance
+      balance: sh.balance,
+      contexts: sh.contexts
     });
 
     sh.frontend.server.listen(FRONT_PORT, function() {
