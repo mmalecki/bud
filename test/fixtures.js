@@ -36,7 +36,8 @@ fixtures.getServers = function getServers(options) {
       url: 'https://127.0.0.1:' + FRONT_PORT,
       port: FRONT_PORT
     }),
-    backends: []
+    backends: [],
+    balance: options.balance || 'roundrobin'
   };
 
   beforeEach(function(cb) {
@@ -84,7 +85,8 @@ fixtures.getServers = function getServers(options) {
         return utile.filter(backend, function(val, key) {
           return !/^(server|requests|index)$/.test(key);
         });
-      })
+      }),
+      balance: sh.balance
     });
 
     sh.frontend.server.listen(FRONT_PORT, function() {
